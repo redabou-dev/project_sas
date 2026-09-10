@@ -1,3 +1,4 @@
+
 const prompt = require('prompt-sync')();
 const trips = [
     {
@@ -181,8 +182,94 @@ const trips = [
         availableSeats: 50
     }
 ];
-const tickets = [];
-let nextTicketId = 1;
+const tickets = [
+    {
+        id: 1,
+        passengerName: "Youssef Amrani",
+        tripId: 1,
+        seatNumber: 1,
+        price: 25
+    },
+    {
+        id: 2,
+        passengerName: "Sara Benali",
+        tripId: 2,
+        seatNumber: 1,
+        price: 90
+    },
+    {
+        id: 3,
+        passengerName: "Omar El Fassi",
+        tripId: 3,
+        seatNumber: 1,
+        price: 140
+    },
+    {
+        id: 4,
+        passengerName: "Nour El Houda",
+        tripId: 1,
+        seatNumber: 2,
+        price: 25
+    },
+    {
+        id: 5,
+        passengerName: "Adam Alaoui",
+        tripId:2,
+        seatNumber: 2,
+        price: 90
+    },
+    {
+        id: 6,
+        passengerName: "Salma Idrissi",
+        tripId: 3,
+        seatNumber: 2,
+        price: 140
+    },
+    {
+        id: 7,
+        passengerName: "Mehdi Tazi",
+        tripId: 1,
+        seatNumber: 3,
+        price: 25
+    },
+    {
+        id: 8,
+        passengerName: "Imane Chraibi",
+        tripId: 2,
+        seatNumber:3,
+        price: 90
+    },
+    {
+        id: 9,
+        passengerName: "Anas Berrada",
+        tripId: 3,
+        seatNumber: 3,
+        price: 140
+    },
+    {
+        id: 10,
+        passengerName: "Lina Ouazzani",
+        tripId: 1,
+        seatNumber: 4,
+        price: 25
+    },
+];
+
+let nextTicketId = 1
+for(let i = 0;i<tickets.length;i++){
+    if(tickets[i].id >= nextTicketId){
+        nextTicketId = tickets[i].id + 1
+    }
+    }
+    for(i=0;i<trips.length;i++){
+        let soldseats = 0;
+        for(let j = 0;j<tickets.length;j++){
+            if(tickets[j].tripId === trips[i].id){
+                soldseats ++
+            }
+        }
+        trips[i].availableSeats -= soldseats
+    }
 
 
 function findTripById(tripsList, tripId) {
@@ -257,7 +344,7 @@ while (userChoice !== 0) {
                     passengerName: passengerName,
                     tripId: selectedTrip.id,
                     seatNumber: seatNumber,
-                    price: selectedTrip.price
+                    price: selectedTrip.price,
                 };
 
                 tickets.push(newTicket);
@@ -270,6 +357,7 @@ while (userChoice !== 0) {
                 console.log(`Trajet : ${selectedTrip.departure} → ${selectedTrip.destination}`);
                 console.log(`Place : ${newTicket.seatNumber}`);
                 console.log(`Prix : ${newTicket.price} DH`);
+                // console.log(`Places restantes : ${selectedTrip.availableSeats}`);
             }
             break;
         }
@@ -330,7 +418,7 @@ while (userChoice !== 0) {
 
             if (foundTickets.length === 0) {
                 console.log("Aucun ticket trouvé.");
-            } else {
+            }else{
                 for (let i = 0; i < foundTickets.length; i++) {
                     let relatedTrip = findTripById(trips, foundTickets[i].tripId);
                     // we use foundTicket for search information of ticket because it have all information about ticket but departure and destination this information its in trip info
@@ -370,11 +458,11 @@ while (userChoice !== 0) {
             let sortedTrips = [...trips];
 
             for (let i = 0; i < sortedTrips.length - 1; i++) {
-                for (let j = 0; j < sortedTrips.length - 1 - i; j++) {
-                    if (sortedTrips[j].price > sortedTrips[j + 1].price) {
-                        let temp = sortedTrips[j];
-                        sortedTrips[j] = sortedTrips[j + 1];
-                        sortedTrips[j + 1] = temp;
+                for (let j = i+1; j < sortedTrips.length; j++) {
+                    if (sortedTrips[i].price > sortedTrips[j].price) {
+                        let temp = sortedTrips[i];
+                        sortedTrips[i] = sortedTrips[j];
+                        sortedTrips[j] = temp;
                     }
                 }
             }
