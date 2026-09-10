@@ -284,7 +284,7 @@ function findTripById(tripsList, tripId) {
 function findTicketsByPassenger(ticketsList, passengerName) {
     let result = [];
     for (let i = 0; i < ticketsList.length; i++) {
-        if (ticketsList[i].passengerName === passengerName) {
+        if (ticketsList[i].passengerName.toLowerCase() === passengerName.toLowerCase()) {
             result.push(ticketsList[i]);
         }
     }
