@@ -406,6 +406,9 @@ while (userChoice !== 0) {
                 tickets.splice(ticketIndex, 1);
                 // ticketIndex its the place of ticket we said to splice remov ticket in this place nd remov just one
                 relatedTrip.availableSeats = relatedTrip.availableSeats + 1;
+                            if (ticketCancel.id === nextTicketId - 1) {
+                nextTicketId = ticketCancel.id;
+            }
 
                 console.log("Ticket annulé avec succès.");
             }
