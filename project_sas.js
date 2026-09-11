@@ -284,7 +284,7 @@ function findTripById(tripsList, tripId) {
 function findTicketsByPassenger(ticketsList, passengerName) {
     let result = [];
     for (let i = 0; i < ticketsList.length; i++) {
-        if (ticketsList[i].passengerName.toLowerCase() === passengerName.toLowerCase()) {
+        if (ticketsList[i].passengerName.toLowerCase().trim() === passengerName.toLowerCase().trim()) {
             result.push(ticketsList[i]);
         }
     }
@@ -466,7 +466,7 @@ while (userChoice !== 0) {
             let filteredTrips = [];
 
             for (let i = 0; i < trips.length; i++) {
-                if (trips[i].departure.toLocaleLowerCase() === cityFilter.toLowerCase()) {
+                if (trips[i].departure.toLowerCase().trim() === cityFilter.toLowerCase().trim()) {
                     filteredTrips.push(trips[i]);
                 }
             }
